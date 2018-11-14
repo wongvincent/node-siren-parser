@@ -21,8 +21,8 @@ module.exports = function(chai, utils) {
 
 			if (Array.isArray(this._obj)) {
 				if (utils.flag(this, 'all')) {
-					desiredValues.forEach(desiredValue => {
-						this._obj.forEach(obj => {
+					desiredValues.forEach(function(desiredValue) {
+						this._obj.forEach(function(obj) {
 							new Assertion(obj.constuctor in validTypes);
 							this.assert(
 								Array.isArray(obj[key]) && obj[key].indexOf(desiredValue) > -1,
@@ -32,7 +32,7 @@ module.exports = function(chai, utils) {
 						});
 					});
 				} else {
-					desiredValues.forEach(desiredValue => {
+					desiredValues.forEach(function(desiredValue) {
 						const found = this._obj.some(obj => {
 							new Assertion(obj.constuctor in validTypes);
 							return Array.isArray(obj[key]) && obj[key].indexOf(desiredValue) > -1;
@@ -46,7 +46,7 @@ module.exports = function(chai, utils) {
 				}
 			} else {
 				new Assertion(this._obj.constuctor in validTypes);
-				desiredValues.forEach(desiredValue => {
+				desiredValues.forEach(function(desiredValue) {
 					this.assert(
 						Array.isArray(this._obj[key]) && this._obj[key].indexOf(desiredValue) > -1,
 						'expected #{this} to have Siren ' + key + ' #{exp}',
@@ -64,7 +64,7 @@ module.exports = function(chai, utils) {
 		Assertion.addChainableMethod(name, /* @this */ function(desiredValue) {
 			if (Array.isArray(this._obj)) {
 				if (utils.flag(this, 'all')) {
-					this._obj.forEach(obj => {
+					this._obj.forEach(function(obj) {
 						new Assertion(obj.constuctor in validTypes);
 						this.assert(
 							obj[key] === desiredValue,
