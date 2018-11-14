@@ -60,7 +60,7 @@ function Action(action) {
 			}
 
 			if (fieldInstance.class) {
-				fieldInstance.class.forEach(cls => {
+				fieldInstance.class.forEach(function(cls) {
 					this._fieldsByClass[cls] = this._fieldsByClass[cls] || [];
 					this._fieldsByClass[cls].push(fieldInstance);
 				});
