@@ -13,7 +13,7 @@ function parseSiren(res, fn) {
 	res.setEncoding('utf8');
 	res.on('data', function(chunk) { res.text += chunk; });
 	res.on('end', function() {
-		let err, body;
+		var err, body;
 		try {
 			body = new Entity(res.text);
 		} catch (e) {
