@@ -66,7 +66,7 @@ function Entity(entity) {
 	this._actionsByType = {};
 	if (entity.actions) {
 		this.actions = [];
-		entity.actions.forEach(action => {
+		entity.actions.forEach(function(action) {
 			const actionInstance = new Action(action);
 			this.actions.push(actionInstance);
 			this._actionsByName[actionInstance.name] = actionInstance;
@@ -82,7 +82,7 @@ function Entity(entity) {
 			}
 
 			if (actionInstance.class) {
-				actionInstance.class.forEach(cls => {
+				actionInstance.class.forEach(function(cls) {
 					this._actionsByClass[cls] = this._actionsByClass[cls] || [];
 					this._actionsByClass[cls].push(actionInstance);
 				});
@@ -95,17 +95,17 @@ function Entity(entity) {
 	this._linksByType = {};
 	if (entity.links) {
 		this.links = [];
-		entity.links.forEach(link => {
+		entity.links.forEach(function(link) {
 			const linkInstance = new Link(link);
 			this.links.push(linkInstance);
 
-			linkInstance.rel.forEach(rel => {
+			linkInstance.rel.forEach(function(rel) {
 				this._linksByRel[rel] = this._linksByRel[rel] || [];
 				this._linksByRel[rel].push(linkInstance);
 			});
 
 			if (linkInstance.class) {
-				linkInstance.class.forEach(cls => {
+				linkInstance.class.forEach(function(cls) {
 					this._linksByClass[cls] = this._linksByClass[cls] || [];
 					this._linksByClass[cls].push(linkInstance);
 				});
@@ -123,12 +123,12 @@ function Entity(entity) {
 	this._entitiesByType = {};
 	if (entity.entities) {
 		this.entities = [];
-		entity.entities.forEach(subEntity => {
+		entity.entities.forEach(function(subEntity) {
 			// Subentities must have a rel array
 			assert(Array.isArray(subEntity.rel),
 				'sub-entities must have a rel array, got ' + JSON.stringify(subEntity.rel));
 
-			let subEntityInstance;
+			var subEntityInstance;
 			if ('string' === typeof subEntity.href) {
 				subEntityInstance = new Link(subEntity);
 			} else {
@@ -136,13 +136,13 @@ function Entity(entity) {
 			}
 			this.entities.push(subEntityInstance);
 
-			subEntityInstance.rel.forEach(rel => {
+			subEntityInstance.rel.forEach(function(rel) {
 				this._entitiesByRel[rel] = this._entitiesByRel[rel] || [];
 				this._entitiesByRel[rel].push(subEntityInstance);
 			});
 
 			if (subEntityInstance.class) {
-				subEntityInstance.class.forEach(cls => {
+				subEntityInstance.class.forEach(function(cls) {
 					this._entitiesByClass[cls] = this._entitiesByClass[cls] || [];
 					this._entitiesByClass[cls].push(subEntityInstance);
 				});
