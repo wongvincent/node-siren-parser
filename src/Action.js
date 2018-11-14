@@ -48,7 +48,7 @@ function Action(action) {
 	if (action.fields) {
 		this.fields = [];
 
-		action.fields.forEach(field => {
+		action.fields.forEach(function(field) {
 			const fieldInstance = new Field(field);
 			this.fields.push(fieldInstance);
 
